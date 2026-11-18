@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video Blender</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="license-gate" id="license-gate" hidden>
+      <div class="license-card">
+        <p class="license-kicker">License</p>
+        <h2 class="license-title">Activate Video Blender</h2>
+        <p class="license-copy">
+          Get a key from your YT Game Show dashboard, then paste it here.
+        </p>
+        <form id="license-form" class="license-form">
+          <input
+            id="license-key"
+            name="key"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="VB-XXXX-XXXX-XXXX-XXXX"
+            aria-label="License key"
+          />
+          <button type="submit" class="btn primary" id="license-submit">Activate</button>
+        </form>
+        <p class="license-msg" id="license-msg" hidden></p>
+        <p class="license-links">
+          <a id="license-dashboard" href="https://flagbattle.powerkits.net/dashboard.html#/video-blender" target="_blank" rel="noopener">Open dashboard</a>
+        </p>
+      </div>
+    </div>
+    <div class="app">
+      <header class="brand">
+        <h1 class="mark">Video Blender</h1>
+        <p class="license-chip" id="license-chip" hidden>Licensed</p>
+      </header>
+
+      <div class="workspace">
+        <section class="panel editor" aria-label="Choose clip and editor">
+          <form id="form" class="form">
+            <button type="button" class="drop" id="pick">
+              <span class="drop-kicker">Source clip</span>
+              <span class="drop-title" id="drop-title">Choose clip on this Mac</span>
+              <span class="drop-meta" id="drop-meta">No copy · uses your file in place · MP4, MOV, MKV</span>
+            </button>
+
+            <div class="fields">
+              <div class="field">
+                <span>Target length</span>
+                <div class="hms" role="group" aria-label="Target length hours minutes seconds">
+                  <input
+                    id="hh"
+                    class="hms-part"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="2"
+                    value="03"
+                    autocomplete="off"
+                    aria-label="Hours"
+                  />
+                  <span class="hms-sep" aria-hidden="true">:</span>
+                  <input
+                    id="mm"
+                    class="hms-part"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="2"
+                    value="33"
+                    autocomplete="off"
+                    aria-label="Minutes"
+                  />
+                  <span class="hms-sep" aria-hidden="true">:</span>
+                  <input
+                    id="ss"
+                    class="hms-part"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="2"
+                    value="33"
+                    autocomplete="off"
+                    aria-label="Seconds"
+                  />
+                </div>
+                <em>hours : minutes : seconds</em>
+              </div>
+
+              <label class="field">
+                <span>Edge blend</span>
+                <input
+                  id="fade"
+                  name="fade"
+                  type="number"
+                  min="0.15"
+                  max="3"
+                  step="0.05"
+                  value="0.75"
+                />
+                <em>seconds · crossfade between copies</em>
+              </label>
+            </div>
+
+            <div class="actions">
+              <button type="submit" id="create" class="btn primary" disabled>
+                Create long video
+              </button>
+              <p class="hint" id="hint">Choose a clip to begin</p>
+            </div>
+          </form>
+
+          <aside class="status" id="status" hidden>
+            <div class="status-head">
+              <span id="status-label">Working</span>
+              <span id="status-pct">0%</span>
+            </div>
+            <div class="bar" aria-hidden="true">
+              <div class="bar-fill" id="bar-fill"></div>
+            </div>
+            <p class="status-msg" id="status-msg">Preparing…</p>
+            <div class="status-actions">
+              <button type="button" class="btn danger" id="cancel" hidden>Cancel</button>
+            </div>
+            <dl class="result" id="result" hidden></dl>
+          </aside>
+        </section>
+
+        <section class="panel preview" aria-label="Preview">
+          <div class="preview-frame" id="preview-frame">
+            <video id="preview" controls playsinline preload="metadata" hidden></video>
+            <div class="preview-empty" id="preview-empty">
+              <p class="preview-kicker">Preview</p>
+              <p class="preview-copy">Your clip will play here after you choose it. The finished long video appears when the job is done.</p>
+            </div>
+          </div>
+          <div class="preview-footer">
+            <p class="preview-caption" id="preview-caption">No clip loaded</p>
+            <div class="finder-grid">
+              <div class="finder-col">
+                <button type="button" class="btn ghost" id="open-input-folder" title="Reveal source in Finder">
+                  Open input folder
+                </button>
+                <button type="button" class="btn ghost" id="open-input-file" title="Open source video">
+                  Open input file
+                </button>
+              </div>
+              <div class="finder-col">
+                <button type="button" class="btn ghost" id="open-output-folder" title="Reveal Long_ export in Finder">
+                  Open output folder
+                </button>
+                <button type="button" class="btn ghost" id="open-output-file" title="Open Long_ export">
+                  Open output file
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
