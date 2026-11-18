@@ -16,3 +16,4 @@ build/
 dist/
 packaging/bin/
 *.spec.bak
+.github/workflows/
